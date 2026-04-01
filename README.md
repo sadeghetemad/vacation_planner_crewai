@@ -1,54 +1,141 @@
-# VacationPlanner Crew
+# 🌍 Vacation Planner Crew AI
 
-Welcome to the VacationPlanner Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+An AI-powered vacation planning system built with CrewAI and AWS
+Bedrock.\
+This project uses multiple AI agents to collaboratively research
+destinations and generate structured travel itineraries.
 
-## Installation
+------------------------------------------------------------------------
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## ✨ Features
 
-First, if you haven't already, install uv:
+-   🤖 Multi-agent system (Researcher + Planner)
+-   🌐 Intelligent destination research
+-   🗺️ Detailed itinerary generation
+-   🍝 Local food recommendations
+-   🧠 Powered by AWS Bedrock LLMs
+-   🎨 Streamlit UI for interaction
+-   🔐 Environment-based configuration with `.env`
 
-```bash
-pip install uv
+------------------------------------------------------------------------
+
+## 🧠 Agents
+
+### 1. Vacation Researcher
+
+-   Role: Senior Vacation Researcher\
+-   Goal: Find the best destinations related to the user's topic\
+-   Specialty: Hidden gems, unique experiences
+
+### 2. Itinerary Planner
+
+-   Role: Itinerary Planner\
+-   Goal: Create a structured travel plan\
+-   Includes:
+    -   City overview & history\
+    -   Tourist attractions\
+    -   Local food recommendations
+
+------------------------------------------------------------------------
+
+## 🏗️ Project Structure
+
+    vacation_planner/
+    ├── .venv/
+    ├── knowledge/
+    ├── src/vacation_planner/
+    │   ├── config/
+    │   ├── tools/
+    │   ├── crew.py
+    │   ├── main.py
+    │   └── __init__.py
+    ├── tests/
+    ├── .env
+    ├── streamlit_ui.py
+    ├── AGENTS.md
+    ├── pyproject.toml
+    ├── uv.lock
+    └── README.md
+
+------------------------------------------------------------------------
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+``` bash
+git clone https://github.com/sadeghetemad/vacation-planner.git
+cd vacation-planner
 ```
 
-Next, navigate to your project directory and install the dependencies:
+### 2. Create virtual environment
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/vacation_planner/config/agents.yaml` to define your agents
-- Modify `src/vacation_planner/config/tasks.yaml` to define your tasks
-- Modify `src/vacation_planner/crew.py` to add your own logic, tools and specific args
-- Modify `src/vacation_planner/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
+``` bash
+uv venv
+source .venv/bin/activate
+# Windows:
+.venv\Scripts\activate
 ```
 
-This command initializes the vacation_planner Crew, assembling the agents and assigning them tasks as defined in your configuration.
+### 3. Install dependencies
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+``` bash
+uv pip install -r requirements.txt
+```
 
-## Understanding Your Crew
+------------------------------------------------------------------------
 
-The vacation_planner Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+## 🔐 Environment Variables
 
-## Support
+Create a `.env` file:
 
-For support, questions, or feedback regarding the VacationPlanner Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+    AWS_ACCESS_KEY_ID=your_key
+    AWS_SECRET_ACCESS_KEY=your_secret
+    AWS_DEFAULT_REGION=us-west-2
+    MODEL_ID=anthropic.claude-3-sonnet-20240229-v1:0
 
-Let's create wonders together with the power and simplicity of crewAI.
+------------------------------------------------------------------------
+
+## 🚀 Running the Project
+
+### ▶ Run CrewAI pipeline
+
+``` bash
+crewai run
+```
+
+### 🎨 Run Streamlit UI
+
+``` bash
+streamlit run streamlit_ui.py
+```
+
+------------------------------------------------------------------------
+
+## 🧪 Example Input
+
+    Plan a 5-day vacation in Italy focused on culture and food
+
+------------------------------------------------------------------------
+
+## 🧰 Tech Stack
+
+-   Python
+-   CrewAI
+-   AWS Bedrock
+-   Streamlit
+-   python-dotenv
+
+------------------------------------------------------------------------
+
+## ⚠️ Notes
+
+-   Do NOT commit your `.env`
+-   Use correct Bedrock model IDs
+-   Ensure AWS region matches model availability
+
+------------------------------------------------------------------------
+
+## 📄 License
+
+MIT License
