@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 import os
 from crewai import LLM
 
+from bedrock_agentcore.runtime import BedrockAgentCoreApp
+
+app = BedrockAgentCoreApp()
+
 load_dotenv()
 
 # Initialize the tool for internet searching capabilities
@@ -76,3 +80,30 @@ class VacationPlanner():
             verbose=True,
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
+
+
+@app.entrypoint
+def agent_invocation(payload, context):
+    '''Handler for agent invocation'''
+
+    print(f"Payload: {payload}")
+
+    try:
+        user_input = payload.get('topic', 'London, UK')
+        print(f"Processing Vacation Destination: {user_input}")
+
+        research_vacation_planner = VacationPlanner()
+        crew = research_vacation_planner.crew()
+        result = crew.kickoff(inputs={'topic': user_input})
+
+        print(f'Result: {result.raw}')
+        print(f"Context: {context}")
+
+    except Exception as err:
+        print(f"Error: {err}")
+
+
+if __name__ == "__main__":
+
+    # Run agentcore server
+    app.run()
