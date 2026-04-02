@@ -1,0 +1,11 @@
+# docker buildx 
+- docker buildx use name_of_your_builder
+- docker buildx ls
+- docker buildx create --use
+- docker buildx build --platform linux/amd64 -t 811165582441.dkr.ecr.us-west-2.amazonaws.com/vacation-planner:v0.0.1-staging --push .
+
+
+# AWS ECR
+- aws ecr create-repository --repository-name name_of_your_repository --region region_name
+- aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin your_aws_acount_id.dkr.ecr.us-west-2.amazonaws.com
+- aws ecr describe-repositories
